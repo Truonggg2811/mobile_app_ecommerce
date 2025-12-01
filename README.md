@@ -3,3 +3,7 @@
 
 # WorkFlow
 <img width="2048" height="504" alt="image" src="https://github.com/user-attachments/assets/8bb5e637-3506-4d08-ab55-7ee045478508" />
+
+# Mẫu giao diện
+<img width="706" height="1600" alt="image" src="https://github.com/user-attachments/assets/39d2a147-fbb5-4cc3-a0ec-72327ec54242" />
+
