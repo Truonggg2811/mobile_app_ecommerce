@@ -87,32 +87,38 @@ public class Seeder {
         // ==================================================================
 
         // Dữ liệu cũ
-        products.add(new Product("p005", "Áo Khoác Dạ Dáng Rộng", 980000, "Áo khoác dạ phom rộng thời thượng, giữ ấm tuyệt đối.", "https://via.placeholder.com/300?text=Ao+Khoac+Da", "AoKhoac"));
-        products.add(new Product("p007", "Áo Mang-to Hai Hàng Khuy", 3890000, "Áo choàng dài cổ điển, điểm nhấn sang trọng cho mùa đông.", "https://via.placeholder.com/300?text=Mang+To", "AoKhoac"));
-        products.add(new Product("p009", "Áo Khoác An Nam", 1090000, "Lấy cảm hứng từ trang phục truyền thống, cách tân hiện đại.", "https://via.placeholder.com/300?text=Ao+Khoac+An+Nam", "AoKhoac"));
-        products.add(new Product("p013", "Áo Khoác Lửng Cổ Da Lộn", 980000, "Dáng áo ngắn (cropped) giúp 'hack' chiều cao hiệu quả.", "https://via.placeholder.com/300?text=Ao+Khoac+Lung", "AoKhoac"));
-        products.add(new Product("p014", "Áo Khoác Denim Workwear", 980000, "Chất liệu Denim bền bỉ, màu xanh Cerulean lạ mắt.", "https://via.placeholder.com/300?text=Ao+Khoac+Jean", "AoKhoac"));
-        products.add(new Product("p018", "Áo Blazer Oversized Nâu", 3490000, "Blazer phom rộng phóng khoáng, phong cách Hàn Quốc.", "https://via.placeholder.com/300?text=Blazer+Nau", "AoKhoac"));
-        products.add(new Product("p020", "Áo Khoác Dù Có Mũ", 2450000, "Chất liệu Nylon chống thấm nước nhẹ, tiện lợi khi đi mưa phùn.", "https://via.placeholder.com/300?text=Ao+Khoac+Du", "AoKhoac"));
+        products.add(new Product("p005", "Áo Khoác Dạ Dáng Rộng", 980000, "Áo khoác dạ phom rộng thời thượng, giữ ấm tuyệt đối.", "https://cdn.hstatic.net/products/200000911315/hi_4de66007d256457dbe197d52f5d3ca2f.jpg", "AoKhoac"));
+        products.add(new Product("p007", "Áo Mang-to Hai Hàng Khuy", 3890000, "Áo choàng dài cổ điển, điểm nhấn sang trọng cho mùa đông.", "https://cdn.hstatic.net/products/200000911315/layer_1_c4ba580a682a407a9ea4e78608d1ad58.jpg", "AoKhoac"));
+        products.add(new Product("p009", "Áo Khoác An Nam", 1090000, "Lấy cảm hứng từ trang phục truyền thống, cách tân hiện đại.", "https://cdn.hstatic.net/products/200000911315/4_2_ae40ba0b64a948f79730d96c038497df.jpg", "AoKhoac"));
+        products.add(new Product("p013", "Áo Khoác Lửng Cổ Da Lộn", 980000, "Dáng áo ngắn (cropped) giúp 'hack' chiều cao hiệu quả.", "https://cdn.hstatic.net/products/200000911315/hi_4de66007d256457dbe197d52f5d3ca2f.jpg", "AoKhoac"));
+        products.add(new Product("p014", "Áo Khoác Denim Workwear", 980000, "Chất liệu Denim bền bỉ, màu xanh Cerulean lạ mắt.", "https://cdn.hstatic.net/products/200000911315/30_29cec18eb59448c2bb683454f26c684a.jpg", "AoKhoac"));
+        products.add(new Product("p018", "Áo Blazer Oversized Nâu", 3490000, "Blazer phom rộng phóng khoáng, phong cách Hàn Quốc.", "https://product.hstatic.net/200000911315/product/13_bc464cd08ed44a47944a0ed6d6ab8959.png", "AoKhoac"));
+        products.add(new Product("p020", "Áo Khoác Dù Có Mũ", 2450000, "Chất liệu Nylon chống thấm nước nhẹ, tiện lợi khi đi mưa phùn.", "https://yame.vn/cdn/shop/files/ao-khoac-non-branded-04-xanh-reu-1174884672.jpg", "AoKhoac"));
 
-        // Dữ liệu MỚI
-        products.add(new Product("p066", "Áo Blazer Đen Basic", 2500000, "Thiết kế 2 cúc cơ bản, đệm vai mỏng, dễ phối đồ.", "https://via.placeholder.com/300?text=Blazer+Den", "AoKhoac"));
-        products.add(new Product("p067", "Áo Bomber Da Lộn", 1500000, "Da lộn nhân tạo (Suede) mềm mịn, bo chun cổ tay.", "https://via.placeholder.com/300?text=Bomber+Da", "AoKhoac"));
-        products.add(new Product("p068", "Áo Khoác Harrington Be", 1200000, "Cổ đứng, lót kẻ caro bên trong, phong cách Anh Quốc.", "https://via.placeholder.com/300?text=Harrington", "AoKhoac"));
-        products.add(new Product("p069", "Áo Khoác Gió Phối Màu", 850000, "Chất liệu dù mỏng nhẹ, phối mảng màu Retro 90s.", "https://via.placeholder.com/300?text=Khoac+Gio", "AoKhoac"));
-        products.add(new Product("p070", "Áo Varsity Jacket", 1350000, "Áo khoác bóng chày, tay da PU, thân nỉ bông.", "https://via.placeholder.com/300?text=Varsity", "AoKhoac"));
-        products.add(new Product("p071", "Áo Khoác Trucker Kaki", 950000, "Dáng áo xe tải (Trucker) khỏe khoắn, vải Kaki dày.", "https://via.placeholder.com/300?text=Trucker", "AoKhoac"));
-        products.add(new Product("p072", "Áo Gile Phao Trần Bông", 680000, "Giữ ấm thân mình, cổ cao, thích hợp mặc lót trong.", "https://via.placeholder.com/300?text=Gile+Phao", "AoKhoac"));
-        products.add(new Product("p073", "Áo Khoác Kimono Cách Tân", 1100000, "Dáng áo Nhật Bản, buộc dây eo, chất vải đũi.", "https://via.placeholder.com/300?text=Kimono", "AoKhoac"));
-        products.add(new Product("p074", "Áo Vest Kẻ Sọc Dọc", 2800000, "Họa tiết Pinstripe sọc dọc mảnh, tôn chiều cao.", "https://via.placeholder.com/300?text=Vest+Ke", "AoKhoac"));
-        products.add(new Product("p075", "Áo Khoác Lông Cừu (Fleece)", 990000, "Chất liệu lông cừu nhân tạo xù nhẹ, cực ấm.", "https://via.placeholder.com/300?text=Fleece", "AoKhoac"));
-        products.add(new Product("p076", "Áo Măng Tô Kaki Dáng Ngắn", 1800000, "Trench coat dáng lửng ngang đùi, màu be cổ điển.", "https://via.placeholder.com/300?text=Mangto+Ngan", "AoKhoac"));
-        products.add(new Product("p077", "Áo Khoác Da Biker", 3500000, "Da thật, nhiều khóa kéo kim loại, phong cách ngầu.", "https://via.placeholder.com/300?text=Biker+Jacket", "AoKhoac"));
-        products.add(new Product("p078", "Áo Khoác Safari Túi Hộp", 1250000, "4 túi hộp phía trước, có đai thắt eo, màu rêu.", "https://via.placeholder.com/300?text=Safari", "AoKhoac"));
-        products.add(new Product("p079", "Áo Cardigan Dệt Kim Dày", 1050000, "Len dày vặn thừng, cúc gỗ, phong cách Đà Lạt.", "https://via.placeholder.com/300?text=Cardigan+Day", "AoKhoac"));
-        products.add(new Product("p080", "Áo Khoác Coach Jacket", 850000, "Dáng áo huấn luyện viên, cúc bấm, in chữ sau lưng.", "https://via.placeholder.com/300?text=Coach", "AoKhoac"));
 
-        // ==================================================================
+
+
+// Dữ liệu MỚI
+        products.add(new Product("p066", "Áo Blazer Đen Basic", 2500000, "Thiết kế 2 cúc cơ bản, đệm vai mỏng, dễ phối đồ.", "https://product.hstatic.net/200000911315/product/11_2_b8cfcf20fa2c444f96e0fda5e02e548b.jpg", "AoKhoac"));
+        products.add(new Product("p067", "Áo Bomber Da Lộn", 1500000, "Da lộn nhân tạo (Suede) mềm mịn, bo chun cổ tay.", "https://product.hstatic.net/200000911315/product/28_05e3f13367654ee0aada29b0f5412c61.jpg", "AoKhoac"));
+        products.add(new Product("p068", "Áo Khoác Harrington Be", 1200000, "Cổ đứng, lót kẻ caro bên trong, phong cách Anh Quốc.", "https://product.hstatic.net/200000870593/product/bh1172_cb8_20_4c16998be20d44709452310e611e7f81_1024x1024.jpg", "AoKhoac"));
+        products.add(new Product("p069", "Áo Khoác Gió Phối Màu", 850000, "Chất liệu dù mỏng nhẹ, phối mảng màu Retro 90s.", "https://n7media.coolmate.me/uploads/November2023/rpd.cm006.7.jpg", "AoKhoac"));
+        products.add(new Product("p070", "Áo Varsity Jacket", 1350000, "Áo khoác bóng chày, tay da PU, thân nỉ bông.", "https://www.gap.com/webcontent/0059/894/289/cn59894289.jpg", "AoKhoac"));
+        products.add(new Product("p071", "Áo Khoác Trucker Kaki", 950000, "Dáng áo xe tải (Trucker) khỏe khoắn, vải Kaki dày.", "https://fttleather.com/uploads/1026/product/2023/10/28/ftt3-medium-a-1698509178.jpg", "AoKhoac"));
+        products.add(new Product("p072", "Áo Gile Phao Trần Bông", 680000, "Giữ ấm thân mình, cổ cao, thích hợp mặc lót trong.", "https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/469863/sub/vngoods_469863_sub1_3x4.jpg", "AoKhoac"));
+        products.add(new Product("p073", "Áo Khoác Kimono Cách Tân", 1100000, "Dáng áo Nhật Bản, buộc dây eo, chất vải đũi.", "https://static.zara.net/assets/public/8252/b5a9/2b614b20bd7d/1b09a24ec95c/05107290802-p/05107290802-p.jpg", "AoKhoac"));
+        products.add(new Product("p074", "Áo Vest Kẻ Sọc Dọc", 2800000, "Họa tiết Pinstripe sọc dọc mảnh, tôn chiều cao.", "https://leci.com.vn/upload/san-pham/v326/img-7798.jpg", "AoKhoac"));
+        products.add(new Product("p075", "Áo Khoác Lông Cừu (Fleece)", 990000, "Chất liệu lông cừu nhân tạo xù nhẹ, cực ấm.", "https://rootrotation.com/cdn/shop/articles/ao-khoac-long-cuu-nam-2.jpg", "AoKhoac"));
+        products.add(new Product("p076", "Áo Măng Tô Kaki Dáng Ngắn", 1800000, "Trench coat dáng lửng ngang đùi, màu be cổ điển.", "https://pubcdn.ivymoda.com/files/product/thumab/400/2022/12/02/f9bd42b4a1eaaf1318d0edfc214a431b.jpg", "AoKhoac"));
+        products.add(new Product("p077", "Áo Khoác Da Biker", 3500000, "Da thật, nhiều khóa kéo kim loại, phong cách ngầu.", "https://static.zara.net/assets/public/3681/951d/f72f491ca7eb/b02cfebc520b/08491421800-p/08491421800-p.jpg", "AoKhoac"));
+        products.add(new Product("p078", "Áo Khoác Safari Túi Hộp", 1250000, "4 túi hộp phía trước, có đai thắt eo, màu rêu.", "https://product.hstatic.net/200000911315/product/7_de3feeb82b824dcbbe00fbb140527f01.png", "AoKhoac"));
+        products.add(new Product("p079", "Áo Cardigan Dệt Kim Dày", 1050000, "Len dày vặn thừng, cúc gỗ, phong cách Đà Lạt.", "https://cdn.hstatic.net/products/200000911315/28_89dfb5fbf1fb473daa613fefdda6e743.jpg", "AoKhoac"));
+        products.add(new Product("p080", "Áo Khoác Coach Jacket", 850000, "Dáng áo huấn luyện viên, cúc bấm, in chữ sau lưng.", "https://product.hstatic.net/200000911315/product/19_3c5006142028494aa2c8dea29afa6233.jpg", "AoKhoac"));
+
+
+// ==================================================================
+
+
         // 4. NHÓM PHỤ KIỆN (ACCESSORIES) - Túi, Ví, Thắt lưng
         // ==================================================================
 
@@ -135,13 +141,13 @@ public class Seeder {
         products.add(new Product("p091", "Túi Du Lịch Duffle", 1500000, "Túi trống cỡ lớn, da bò sáp, dùng cho chuyến đi 3 ngày.", "https://bizweb.dktcdn.net/100/462/540/products/firebrick.jpg?v=1737010706113", "PhuKien"));
         products.add(new Product("p092", "Giày Loafer Da Bóng", 1800000, "Giày lười da bóng (Penny Loafer), đế cao 3cm.", "https://giaynamducha.com/wp-content/uploads/2024/11/IMG_9383-e1731317152957.jpg", "PhuKien"));
         products.add(new Product("p093", "Dép Sandal Quai Hậu", 850000, "Dép xăng-đan đế trấu hoặc cao su, quai da.", "https://product.hstatic.net/200000374789/product/zen_0057_7debc67e70a64b12962ba462ee7b4163_master.jpg", "PhuKien"));
-        products.add(new Product("p094", "Mũ Len Beanie", 250000, "Mũ len dệt kim ôm đầu, giữ ấm tai.", "https://via.placeholder.com/300?text=Beanie", "PhuKien"));
-        products.add(new Product("p095", "Thắt Lưng Da Nâu Bản To", 680000, "Da bò nguyên miếng màu nâu, khóa đồng đúc.", "https://via.placeholder.com/300?text=Day+Nit+Nau", "PhuKien"));
-        products.add(new Product("p096", "Ví Cầm Tay Clutch", 1100000, "Ví dài cầm tay, đựng vừa điện thoại và giấy tờ.", "https://via.placeholder.com/300?text=Clutch", "PhuKien"));
-        products.add(new Product("p097", "Găng Tay Da Cảm Ứng", 450000, "Găng tay da lót nỉ, đầu ngón tay dùng được điện thoại.", "https://via.placeholder.com/300?text=Gang+Tay", "PhuKien"));
-        products.add(new Product("p098", "Túi Bao Tử (Bum Bag)", 380000, "Đeo hông hoặc đeo chéo ngực, vải dù chống nước.", "https://via.placeholder.com/300?text=Bum+Bag", "PhuKien"));
-        products.add(new Product("p099", "Dây Đeo Thẻ Da", 150000, "Dây đeo thẻ nhân viên bằng da, màu sắc trang nhã.", "https://via.placeholder.com/300?text=Day+The", "PhuKien"));
-        products.add(new Product("p100", "Móc Khóa Da Handmade", 90000, "Móc khóa da bò dập tên, phụ kiện nhỏ xinh.", "https://via.placeholder.com/300?text=Moc+Khoa", "PhuKien"));
+        products.add(new Product("p094", "Mũ Len Beanie", 250000, "Mũ len dệt kim ôm đầu, giữ ấm tai.", "https://cdn.vuahanghieu.com/unsafe/0x500/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2025/12/mu-len-mlb-new-york-yankees-3abnb1556-50bks-mau-den-693935e661f18-10122025155710.jpg", "PhuKien"));
+        products.add(new Product("p095", "Thắt Lưng Da Nâu Bản To", 680000, "Da bò nguyên miếng màu nâu, khóa đồng đúc.", "https://static.zara.net/assets/public/969a/8dd7/cb8e439b83be/97c7eaf9b8c7/05919324716-a1/05919324716-a1.jpg", "PhuKien"));
+        products.add(new Product("p096", "Ví Cầm Tay Clutch", 1100000, "Ví dài cầm tay, đựng vừa điện thoại và giấy tờ.", "https://cdn.hstatic.net/products/1000260559/clutch-da-bo-lich-lam-cam-tay-tien-loi-4880963__6__8cd70d3156634ebc9307d57a167ff04b_medium.jpg", "PhuKien"));
+        products.add(new Product("p097", "Găng Tay Da Cảm Ứng", 450000, "Găng tay da lót nỉ, đầu ngón tay dùng được điện thoại.", "https://laforce.vn/wp-content/uploads/2024/12/gang-tay-nam-GTLACUNA-23-D-1-900x1080.jpg", "PhuKien"));
+        products.add(new Product("p098", "Túi Bao Tử (Bum Bag)", 380000, "Đeo hông hoặc đeo chéo ngực, vải dù chống nước.", "https://m.media-amazon.com/images/I/51+i01KqYrL._AC_UL480_FMwebp_QL65_.jpg", "PhuKien"));
+        products.add(new Product("p099", "Dây Đeo Thẻ Da", 150000, "Dây đeo thẻ nhân viên bằng da, màu sắc trang nhã.", "https://product.hstatic.net/1000362139/product/bo_mat_the_da_bb8ba0ccbfa54291a04cf71c2f186289_large.jpg", "PhuKien"));
+        products.add(new Product("p100", "Móc Khóa Da Handmade", 90000, "Móc khóa da bò dập tên, phụ kiện nhỏ xinh.", "https://thecrafthouse.vn/cdn/shop/files/Dogcharm_ChoiBanh_3_11zon.jpg", "PhuKien"));
 
 
         // Vòng lặp đẩy lên Firebase (Giữ nguyên logic cũ của bạn)
