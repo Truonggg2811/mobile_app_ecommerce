@@ -8,16 +8,18 @@ public class CartItem implements Serializable {
     private double productPrice;
     private String productImage;
     private int quantity;
+    private String size;
 
     public CartItem() {
     }
 
-    public CartItem(String productId, String productName, double productPrice, String productImage, int quantity) {
+    public CartItem(String productId, String productName, double productPrice, String productImage, int quantity, String size) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productImage = productImage;
         this.quantity = quantity;
+        this.size = size;
     }
 
     public String getProductId() {
@@ -58,5 +60,13 @@ public class CartItem implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }
