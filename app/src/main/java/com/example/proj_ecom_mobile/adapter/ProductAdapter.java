@@ -1,7 +1,6 @@
 package com.example.proj_ecom_mobile.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.proj_ecom_mobile.R;
-import com.example.proj_ecom_mobile.activity.user.ProductDetailActivity;
 import com.example.proj_ecom_mobile.model.Product;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -47,17 +45,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .placeholder(R.drawable.ic_home)
                 .error(R.drawable.ic_home)
                 .into(holder.imgProduct);
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ProductDetailActivity.class);
-            intent.putExtra("product_item", product);
-            context.startActivity(intent);
-        });
     }
 
     @Override
     public int getItemCount() {
         return productList.size();
+    }
+
+    public void updateList(ArrayList<Product> newList) {
+        this.productList = newList;
+        notifyDataSetChanged();
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
