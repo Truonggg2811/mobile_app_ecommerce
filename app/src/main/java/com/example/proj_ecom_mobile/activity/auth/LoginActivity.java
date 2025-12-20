@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,12 +32,12 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private SessionManager sessionManager;
+    private FirebaseFirestore db;
 
-    // Khai báo các biến giao diện
     private ImageView btnGoogle;
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
-    private TextView tvRegister; // Đây là nút chuyển sang Đăng ký
+    private TextView tvRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         sessionManager = new SessionManager(this);
 
-        // Cấu hình Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -58,26 +59,22 @@ public class LoginActivity extends AppCompatActivity {
 
         btnGoogle.setOnClickListener(v -> signInWithGoogle());
 
-        // 2. Nút Chuyển sang Đăng ký (ĐÂY LÀ PHẦN BẠN THIẾU)
         tvRegister.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
-        // 3. Nút Đăng nhập bằng Email/Pass
         btnLogin.setOnClickListener(v -> handleLoginWithEmail());
     }
 
     private void initView() {
-        // Ánh xạ ID chuẩn theo file layout xml của bạn
         btnGoogle = findViewById(R.id.btn_google_sign_in);
         edtEmail = findViewById(R.id.edt_email);
         edtPassword = findViewById(R.id.edt_password);
         btnLogin = findViewById(R.id.btn_login);
-        tvRegister = findViewById(R.id.tv_switch_register); // ID này phải trùng khớp với trong XML
+        tvRegister = findViewById(R.id.tv_switch_register);
     }
 
-    // --- XỬ LÝ ĐĂNG NHẬP THƯỜNG ---
     private void handleLoginWithEmail() {
         String email = edtEmail.getText().toString().trim();
         String password = edtPassword.getText().toString().trim();
@@ -98,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    // --- XỬ LÝ GOOGLE ---
     private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -134,15 +130,34 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            String email = user.getEmail();
-            sessionManager.createLoginSession(email, "user");
+            db.collection("Users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String role = documentSnapshot.getString("role");
+                            String email = user.getEmail();
 
-            Toast.makeText(this, "Xin chào " + email, Toast.LENGTH_SHORT).show();
+                            sessionManager.createLoginSession(email, role);
+                            Toast.makeText(this, "Xin chào " + email, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+                            Intent intent;
+                            if ("admin".equals(role)) {
+                                intent = new Intent(LoginActivity.this, com.example.proj_ecom_mobile.activity.admin.AdminMainActivity.class);
+                            } else {
+                                intent = new Intent(LoginActivity.this, MainActivity.class);
+                            }
+
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Lỗi: Không tìm thấy thông tin user", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Lỗi kết nối: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
         }
     }
 }
