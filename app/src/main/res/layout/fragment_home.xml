@@ -22,9 +22,10 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_search"
+            android:id="@+id/btn_cart_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_cart"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             app:tint="@color/white"/>
@@ -43,7 +44,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:src="@drawable/ic_home"
+                android:src="@drawable/ic_anhbia"
                 android:scaleType="centerCrop"
                 android:background="@color/brand_beige"/>
 

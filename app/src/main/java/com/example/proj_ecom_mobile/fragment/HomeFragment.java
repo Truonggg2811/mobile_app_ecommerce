@@ -1,10 +1,12 @@
 package com.example.proj_ecom_mobile.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.proj_ecom_mobile.R;
+import com.example.proj_ecom_mobile.activity.user.CartActivity;
 import com.example.proj_ecom_mobile.adapter.ProductAdapter;
 import com.example.proj_ecom_mobile.model.Product;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private ImageView btnCart;
     private ProductAdapter adapter;
     private ArrayList<Product> productList;
     private FirebaseFirestore db;
@@ -30,19 +34,21 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // 1. Ánh xạ RecyclerView
         recyclerView = view.findViewById(R.id.recycler_products);
+        btnCart = view.findViewById(R.id.btn_cart_home);
 
-        // 2. Cấu hình hiển thị dạng lưới (Grid) 2 cột
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        // 3. Khởi tạo danh sách và Adapter
         productList = new ArrayList<>();
         adapter = new ProductAdapter(getContext(), productList);
         recyclerView.setAdapter(adapter);
 
-        // 4. Gọi hàm tải dữ liệu
         loadProductsFromFirebase();
+
+        btnCart.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), CartActivity.class);
+            startActivity(intent);
+        });
 
         return view;
     }
@@ -50,21 +56,18 @@ public class HomeFragment extends Fragment {
     private void loadProductsFromFirebase() {
         db = FirebaseFirestore.getInstance();
 
-        // Lấy toàn bộ dữ liệu trong collection "products"
         db.collection("products")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
-                        productList.clear(); // Xóa list cũ để tránh trùng lặp
+                        productList.clear();
                         for (DocumentSnapshot d : queryDocumentSnapshots) {
-                            // Chuyển đổi dữ liệu JSON từ Firebase thành Object Product
                             Product p = d.toObject(Product.class);
                             if (p != null) {
-                                p.setId(d.getId()); // Lưu lại ID của document
+                                p.setId(d.getId());
                                 productList.add(p);
                             }
                         }
-                        // Báo cho Adapter biết dữ liệu đã thay đổi để vẽ lại màn hình
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(getContext(), "Chưa có sản phẩm nào!", Toast.LENGTH_SHORT).show();

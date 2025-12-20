@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class SQLHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "EcomStore.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public SQLHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -20,12 +20,10 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // 1. Bảng lưu sản phẩm (để xem offline)
         String createProductTable = "CREATE TABLE products (id TEXT PRIMARY KEY, name TEXT, price REAL, image TEXT, description TEXT, category TEXT)";
         db.execSQL(createProductTable);
 
-        // 2. Bảng lưu giỏ hàng (QUAN TRỌNG: để đặt hàng)
-        String createCartTable = "CREATE TABLE cart (productId TEXT PRIMARY KEY, productName TEXT, productPrice REAL, productImage TEXT, quantity INTEGER)";
+        String createCartTable = "CREATE TABLE cart (productId TEXT, productName TEXT, productPrice REAL, productImage TEXT, quantity INTEGER, size TEXT)";
         db.execSQL(createCartTable);
     }
 
@@ -36,7 +34,6 @@ public class SQLHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // --- PHẦN 1: QUẢN LÝ SẢN PHẨM OFFLINE (Giữ nguyên từ file cũ của bạn) ---
     public void syncProducts(ArrayList<Product> list) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
@@ -80,36 +77,31 @@ public class SQLHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    // --- PHẦN 2: QUẢN LÝ GIỎ HÀNG (PHẦN BẠN ĐANG THIẾU) ---
-    // Hàm này dùng để thêm sản phẩm vào giỏ hoặc tăng số lượng nếu đã có
     public void addToCart(CartItem item) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // Kiểm tra xem sản phẩm này đã có trong giỏ chưa
-        Cursor cursor = db.rawQuery("SELECT * FROM cart WHERE productId = ?", new String[]{item.getProductId()});
+        Cursor cursor = db.rawQuery("SELECT * FROM cart WHERE productId = ? AND size = ?", new String[]{item.getProductId(), item.getSize()});
 
         if (cursor.moveToFirst()) {
-            // Nếu có rồi -> Cộng dồn số lượng
-            int currentQty = cursor.getInt(4); // Cột quantity là cột thứ 4 (tính từ 0)
+            int currentQty = cursor.getInt(4);
             int newQty = currentQty + item.getQuantity();
             ContentValues values = new ContentValues();
             values.put("quantity", newQty);
-            db.update("cart", values, "productId = ?", new String[]{item.getProductId()});
+            db.update("cart", values, "productId = ? AND size = ?", new String[]{item.getProductId(), item.getSize()});
         } else {
-            // Nếu chưa có -> Thêm mới
             ContentValues values = new ContentValues();
             values.put("productId", item.getProductId());
             values.put("productName", item.getProductName());
             values.put("productPrice", item.getProductPrice());
             values.put("productImage", item.getProductImage());
             values.put("quantity", item.getQuantity());
+            values.put("size", item.getSize());
             db.insert("cart", null, values);
         }
         cursor.close();
         db.close();
     }
 
-    // Hàm lấy danh sách để hiển thị lên màn hình CartActivity
     public ArrayList<CartItem> getCartItems() {
         ArrayList<CartItem> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -118,11 +110,12 @@ public class SQLHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 list.add(new CartItem(
-                        cursor.getString(0), // productId
-                        cursor.getString(1), // productName
-                        cursor.getDouble(2), // productPrice
-                        cursor.getString(3), // productImage
-                        cursor.getInt(4)     // quantity
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getDouble(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getString(5)
                 ));
             } while (cursor.moveToNext());
         }
@@ -131,10 +124,22 @@ public class SQLHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    // Hàm xóa giỏ hàng (Dùng khi Đặt hàng thành công)
     public void clearCart() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM cart");
+        db.close();
+    }
+
+    public void deleteCartItem(String productId, String size) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("cart", "productId = ? AND size = ?", new String[]{productId, size});
+        db.close();
+    }
+    public void updateQuantity(String productId, String size, int newQuantity) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("quantity", newQuantity);
+        db.update("cart", values, "productId = ? AND size = ?", new String[]{productId, size});
         db.close();
     }
 }

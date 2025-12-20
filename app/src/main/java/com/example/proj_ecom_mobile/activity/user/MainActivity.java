@@ -21,21 +21,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // --- QUAN TRỌNG: KÍCH HOẠT DỮ LIỆU ---
-        // Dòng này sẽ nạp 20 sản phẩm mẫu vào Firebase ngay khi App chạy.
-        Seeder.seedProductData();
+        // --- KÍCH HOẠT SEEDER THÔNG MINH ---
+        // Truyền 'this' (context) vào để kiểm tra bộ nhớ
+        // Nó sẽ tự động bỏ qua nếu đã chạy rồi.
+        Seeder.seedProductData(this);
         // -------------------------------------
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
 
-        // Mặc định hiển thị trang chủ (HomeFragment) khi vừa mở App
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_container, new HomeFragment())
                     .commit();
         }
 
-        // Xử lý sự kiện khi bấm vào các nút dưới thanh Menu
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
