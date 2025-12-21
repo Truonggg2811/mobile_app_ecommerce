@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#F5F5F5"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QUẢN TRỊ VIÊN"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="40dp"/>
+
+    <Button
+        android:id="@+id/btn_manage_product"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Quản lý Sản phẩm &amp; Kho"
+        android:backgroundTint="#333333"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btn_manage_user"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Quản lý Tài khoản"
+        android:backgroundTint="#333333"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btn_manage_order"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Quản lý Đơn hàng"
+        android:backgroundTint="#333333"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btn_admin_logout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Đăng xuất"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>

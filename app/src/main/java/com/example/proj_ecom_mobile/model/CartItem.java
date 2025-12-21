@@ -9,17 +9,19 @@ public class CartItem implements Serializable {
     private String productImage;
     private int quantity;
     private String size;
+    private int stock; // Biến mới thêm để lưu giới hạn tồn kho
 
     public CartItem() {
     }
 
-    public CartItem(String productId, String productName, double productPrice, String productImage, int quantity, String size) {
+    public CartItem(String productId, String productName, double productPrice, String productImage, int quantity, String size, int stock) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productImage = productImage;
         this.quantity = quantity;
         this.size = size;
+        this.stock = stock;
     }
 
     public String getProductId() {
@@ -68,5 +70,13 @@ public class CartItem implements Serializable {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

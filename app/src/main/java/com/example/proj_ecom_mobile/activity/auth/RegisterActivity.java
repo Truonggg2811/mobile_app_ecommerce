@@ -116,10 +116,11 @@ public class RegisterActivity extends AppCompatActivity {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("uid", user.getUid());
         userMap.put("email", user.getEmail());
-        userMap.put("role", "user");
         userMap.put("name", user.getEmail());
         userMap.put("created_at", System.currentTimeMillis());
         userMap.put("password", passwordInput);
+
+        userMap.put("role", "user");
 
         db.collection("Users").document(user.getUid())
                 .set(userMap)
@@ -127,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (isGoogleSignIn) {
                         sessionManager.createLoginSession(user.getEmail(), "user");
                         Toast.makeText(RegisterActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -190,8 +192,20 @@ public class RegisterActivity extends AppCompatActivity {
                     if (!documentSnapshot.exists()) {
                         saveUserToFirestore(user, true, "Google Login");
                     } else {
-                        sessionManager.createLoginSession(user.getEmail(), "user");
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        String role = documentSnapshot.getString("role");
+                        sessionManager.createLoginSession(user.getEmail(), role);
+
+                        Intent intent;
+                        if ("admin".equals(role)) {
+                            try {
+                                Class<?> adminClass = Class.forName("com.example.proj_ecom_mobile.activity.admin.AdminMainActivity");
+                                intent = new Intent(RegisterActivity.this, adminClass);
+                            } catch (ClassNotFoundException e) {
+                                intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            }
+                        } else {
+                            intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        }
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
