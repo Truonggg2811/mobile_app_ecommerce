@@ -1,11 +1,9 @@
 package com.example.proj_ecom_mobile.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .placeholder(R.drawable.ic_home)
                 .into(holder.imgProduct);
 
+        // Nút Giảm (-)
         holder.btnMinus.setOnClickListener(v -> {
             int currentQty = item.getQuantity();
             if (currentQty > 1) {
@@ -62,54 +61,43 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 holder.txtQty.setText(String.valueOf(newQty));
                 sqlHelper.updateQuantity(item.getProductId(), item.getSize(), newQty);
 
+                // Cập nhật tổng tiền bên ngoài
                 if (context instanceof CartActivity) {
                     ((CartActivity) context).updateTotalPrice();
                 }
             } else {
-                showDeleteDialog(position, item);
+                Toast.makeText(context, "Số lượng tối thiểu là 1", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // Nút Tăng (+)
         holder.btnPlus.setOnClickListener(v -> {
-            // Kiểm tra tồn kho của chính size này (item.getStock() đã lưu max stock của size đó)
-            if (item.getQuantity() < item.getStock()) {
-                int newQty = item.getQuantity() + 1;
-                item.setQuantity(newQty);
-                holder.txtQty.setText(String.valueOf(newQty));
-                sqlHelper.updateQuantity(item.getProductId(), item.getSize(), newQty);
+            int newQty = item.getQuantity() + 1;
+            item.setQuantity(newQty);
+            holder.txtQty.setText(String.valueOf(newQty));
+            sqlHelper.updateQuantity(item.getProductId(), item.getSize(), newQty);
 
-                if (context instanceof CartActivity) {
-                    ((CartActivity) context).updateTotalPrice();
-                }
-            } else {
-                Toast.makeText(context, "Quá số lượng tồn kho của size " + item.getSize() + "! (Max: " + item.getStock() + ")", Toast.LENGTH_SHORT).show();
+            if (context instanceof CartActivity) {
+                ((CartActivity) context).updateTotalPrice();
             }
         });
 
-        holder.btnDelete.setOnClickListener(v -> showDeleteDialog(position, item));
+        // Nút Xóa
+        holder.btnDelete.setOnClickListener(v -> {
+            sqlHelper.deleteCartItem(item.getProductId(), item.getSize());
+            cartList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, cartList.size());
+
+            if (context instanceof CartActivity) {
+                ((CartActivity) context).updateTotalPrice();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return cartList.size();
-    }
-
-    private void showDeleteDialog(int position, CartItem item) {
-        new AlertDialog.Builder(context)
-                .setTitle("Xóa sản phẩm")
-                .setMessage("Bạn có muốn xóa sản phẩm này khỏi giỏ hàng?")
-                .setPositiveButton("Xóa", (dialog, which) -> {
-                    sqlHelper.deleteCartItem(item.getProductId(), item.getSize());
-                    cartList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, cartList.size());
-
-                    if (context instanceof CartActivity) {
-                        ((CartActivity) context).updateTotalPrice();
-                    }
-                })
-                .setNegativeButton("Hủy", null)
-                .show();
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
@@ -124,6 +112,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             txtSize = itemView.findViewById(R.id.cart_item_size);
             imgProduct = itemView.findViewById(R.id.cart_item_img);
             btnDelete = itemView.findViewById(R.id.btn_delete_item);
+
+            // 2 nút mới
             btnMinus = itemView.findViewById(R.id.btn_minus);
             btnPlus = itemView.findViewById(R.id.btn_plus);
         }
