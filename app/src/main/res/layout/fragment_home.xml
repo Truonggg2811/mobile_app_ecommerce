@@ -22,9 +22,10 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_search"
+            android:id="@+id/btn_cart_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_cart"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             app:tint="@color/white"/>
@@ -43,14 +44,79 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:src="@drawable/ic_home"
+                android:src="@drawable/ic_anhbia"
                 android:scaleType="centerCrop"
                 android:background="@color/brand_beige"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:paddingVertical="16dp"
+                android:paddingStart="16dp"
+                android:clipToPadding="false">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/cate_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tất cả"
+                        android:backgroundTint="#000000"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+                    <Button
+                        android:id="@+id/cate_ao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Áo"
+                        android:backgroundTint="#EEEEEE"
+                        android:textColor="#000000"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+                    <Button
+                        android:id="@+id/cate_quan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quần"
+                        android:backgroundTint="#EEEEEE"
+                        android:textColor="#000000"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+                    <Button
+                        android:id="@+id/cate_khoac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Áo Khoác"
+                        android:backgroundTint="#EEEEEE"
+                        android:textColor="#000000"
+                        android:layout_marginEnd="8dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+                    <Button
+                        android:id="@+id/cate_pk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phụ Kiện"
+                        android:backgroundTint="#EEEEEE"
+                        android:textColor="#000000"
+                        android:layout_marginEnd="16dp"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:paddingHorizontal="16dp"
                 android:text="@string/title_featured"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
