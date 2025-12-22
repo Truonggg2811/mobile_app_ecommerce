@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.proj_ecom_mobile.R;
 import com.example.proj_ecom_mobile.activity.auth.LoginActivity;
-
+import com.example.proj_ecom_mobile.activity.user.ChangePasswordActivity;
 import com.example.proj_ecom_mobile.activity.user.OrderHistoryActivity;
 import com.example.proj_ecom_mobile.activity.user.UserInfoActivity;
 import com.example.proj_ecom_mobile.database.SessionManager;
@@ -79,7 +78,13 @@ public class ProfileFragment extends Fragment {
             if (mAuth.getCurrentUser() != null) startActivity(new Intent(getContext(), UserInfoActivity.class));
         });
 
-
+        btnChangePassword.setOnClickListener(v -> {
+            if (mAuth.getCurrentUser() != null) {
+                startActivity(new Intent(getContext(), ChangePasswordActivity.class));
+            } else {
+                Toast.makeText(getContext(), "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnLogout.setOnClickListener(v -> {
             mAuth.signOut();
