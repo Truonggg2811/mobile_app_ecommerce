@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class SQLHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "EcomStore.db";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3; // Tăng version để cập nhật cấu trúc bảng
 
     public SQLHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -23,7 +23,8 @@ public class SQLHelper extends SQLiteOpenHelper {
         String createProductTable = "CREATE TABLE products (id TEXT PRIMARY KEY, name TEXT, price REAL, image TEXT, description TEXT, category TEXT)";
         db.execSQL(createProductTable);
 
-        String createCartTable = "CREATE TABLE cart (productId TEXT, productName TEXT, productPrice REAL, productImage TEXT, quantity INTEGER, size TEXT)";
+        // Thêm cột stock INTEGER
+        String createCartTable = "CREATE TABLE cart (productId TEXT, productName TEXT, productPrice REAL, productImage TEXT, quantity INTEGER, size TEXT, stock INTEGER)";
         db.execSQL(createCartTable);
     }
 
@@ -87,6 +88,7 @@ public class SQLHelper extends SQLiteOpenHelper {
             int newQty = currentQty + item.getQuantity();
             ContentValues values = new ContentValues();
             values.put("quantity", newQty);
+            values.put("stock", item.getStock()); // Cập nhật lại stock mới nhất
             db.update("cart", values, "productId = ? AND size = ?", new String[]{item.getProductId(), item.getSize()});
         } else {
             ContentValues values = new ContentValues();
@@ -96,6 +98,7 @@ public class SQLHelper extends SQLiteOpenHelper {
             values.put("productImage", item.getProductImage());
             values.put("quantity", item.getQuantity());
             values.put("size", item.getSize());
+            values.put("stock", item.getStock()); // Lưu stock
             db.insert("cart", null, values);
         }
         cursor.close();
@@ -115,7 +118,8 @@ public class SQLHelper extends SQLiteOpenHelper {
                         cursor.getDouble(2),
                         cursor.getString(3),
                         cursor.getInt(4),
-                        cursor.getString(5)
+                        cursor.getString(5),
+                        cursor.getInt(6) // Đọc cột stock (index 6)
                 ));
             } while (cursor.moveToNext());
         }
@@ -135,11 +139,25 @@ public class SQLHelper extends SQLiteOpenHelper {
         db.delete("cart", "productId = ? AND size = ?", new String[]{productId, size});
         db.close();
     }
+
     public void updateQuantity(String productId, String size, int newQuantity) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("quantity", newQuantity);
         db.update("cart", values, "productId = ? AND size = ?", new String[]{productId, size});
         db.close();
+    }
+
+    // Hàm đếm số lượng theo Size cụ thể
+    public int getTotalQuantityForProductAndSize(String productId, String size) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int total = 0;
+        Cursor cursor = db.rawQuery("SELECT quantity FROM cart WHERE productId = ? AND size = ?", new String[]{productId, size});
+        if (cursor.moveToFirst()) {
+            total = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+        return total;
     }
 }

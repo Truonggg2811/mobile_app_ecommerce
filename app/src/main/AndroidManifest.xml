@@ -16,13 +16,34 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".activity.user.MainActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.user.MainActivity" />
+
+        <activity android:name=".activity.user.ProductDetailActivity" />
+        <activity android:name=".activity.user.CartActivity" />
+        <activity android:name=".activity.user.CheckoutActivity" />
+        <activity android:name=".activity.user.CategoryProductsActivity" />
+        <activity android:name=".activity.user.OrderHistoryActivity" />
+        <activity android:name=".activity.user.ChangePasswordActivity"/>
+        <activity android:name=".activity.user.OrderDetailActivity" />
+        <activity android:name=".activity.user.UserInfoActivity" />
+        <activity android:name=".activity.user.PaymentQRActivity" />
+        <activity android:name=".activity.auth.ForgotPasswordActivity" />
+        <activity android:name=".activity.auth.RegisterActivity" />
+        <activity android:name=".activity.auth.LoginActivity" />
+
+        <activity android:name=".activity.admin.AdminMainActivity" />
+        <activity android:name=".activity.admin.ManageProductActivity" />
+        <activity android:name=".activity.admin.ManageUserActivity" />
+        <activity android:name=".activity.admin.ManageOrderActivity" />
+        <activity android:name=".activity.admin.ManageVoucherActivity" />
 
     </application>
 
